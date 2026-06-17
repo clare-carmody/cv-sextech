@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clare Carmody — Lovehoney Application</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink: #e8a0b4;
+      --pink-light: #fdf0f4;
+      --pink-mid: #f2d0dc;
+      --dark: #3a2a2e;
+      --mid: #6b5259;
+      --light: #b09aa0;
+      --bg: #fffbfc;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(250, 248, 249, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--pink-mid);
+      z-index: 100;
+      padding: 0 2rem;
+    }
+    nav ul {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      height: 52px;
+      align-items: center;
+    }
+    nav a {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--pink); }
+
+    /* HERO */
+    .hero {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      border-bottom: 1px solid var(--pink-mid);
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5rem);
+      font-weight: 400;
+      line-height: 1.05;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .hero h1 em {
+      color: var(--pink);
+      font-style: italic;
+    }
+    .hero .tagline {
+      font-size: 0.95rem;
+      color: var(--light);
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+    }
+    .hero .contact {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      font-size: 0.85rem;
+      color: var(--light);
+    }
+    .hero .contact a {
+      color: var(--pink);
+      text-decoration: none;
+    }
+    .hero .contact a:hover { text-decoration: underline; }
+
+    /* MAIN */
+    main {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+    }
+
+    /* SECTION LABEL */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin: 3.5rem 0 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--pink-mid);
+    }
+
+    /* COVER LETTER */
+    .letter p {
+      font-size: 1rem;
+      color: var(--mid);
+      margin-bottom: 1.4rem;
+      max-width: 65ch;
+    }
+    .letter p.opener {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--dark);
+      font-style: italic;
+    }
+    .letter .sign-off {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: var(--light);
+    }
+    .letter .sign-off strong {
+      display: block;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--dark);
+      font-weight: 400;
+      margin-top: 0.25rem;
+    }
+
+    /* CV */
+    .profile-text {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 65ch;
+      line-height: 1.75;
+    }
+
+    .role {
+      margin: 2rem 0 0;
+    }
+    .role-header {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.2rem;
+    }
+    .role-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .role-org {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--pink);
+      font-weight: 400;
+    }
+    .role-dot { color: var(--pink-mid); font-size: 0.9rem; }
+    .role-date {
+      font-size: 0.8rem;
+      color: var(--light);
+      font-style: italic;
+      margin-bottom: 0.75rem;
+    }
+    .role ul {
+      list-style: none;
+      padding: 0;
+    }
+    .role ul li {
+      font-size: 0.9rem;
+      color: var(--mid);
+      padding: 0.2rem 0 0.2rem 1.2rem;
+      position: relative;
+      max-width: 62ch;
+    }
+    .role ul li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--pink);
+    }
+
+    /* SKILLS GRID */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem 2rem;
+      margin-top: 0.5rem;
+    }
+    .skill-row {
+      font-size: 0.875rem;
+      color: var(--mid);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--pink-light);
+    }
+    .skill-row strong {
+      color: var(--pink);
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.15rem;
+    }
+
+    /* PROJECTS */
+    .project {
+      margin: 1.5rem 0;
+    }
+    .project h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.15rem;
+    }
+    .project .proj-date {
+      font-size: 0.78rem;
+      color: var(--light);
+      font-style: italic;
+      margin-bottom: 0.4rem;
+    }
+    .project p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      max-width: 60ch;
+    }
+
+    /* EDUCATION */
+    .edu-row {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+    }
+    .edu-item h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .edu-item p {
+      font-size: 0.85rem;
+      color: var(--light);
+    }
+    .edu-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: var(--pink-light);
+      color: var(--pink);
+      padding: 0.1rem 0.5rem;
+      border-radius: 2px;
+      margin-top: 0.25rem;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #888;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.8rem;
+    }
+    footer a { color: var(--pink); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .skills-grid { grid-template-columns: 1fr; }
+      .edu-row { flex-direction: column; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#cover-letter">Cover Letter</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="mailto:clare@melba.app">Get in touch</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Clare<br><em>Carmody</em></h1>
+  <p class="tagline">AI Enablement &amp; Innovation · Change Management · Sextech Professional</p>
+  <div class="contact">
+    <span><a href="mailto:clare@melba.app">clare@melba.app</a></span>
+    <span>+33 6 66 26 52 00</span>
+    <span>Willing to relocate to Bath</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- COVER LETTER -->
+  <div id="cover-letter">
+    <p class="section-label">Cover Letter</p>
+    <div class="letter">
+      <p class="opener">This role is essentially what I currently do for a Sextech app and what I did for nearly ten years before that at Salesforce.</p>
+
+      <p>I am the Claude Admin at Melba and responsible for all our AI products. I spent ten years at Salesforce leading Change Management and Enablement across EMEA, APAC, and LATAM. Part of this was of course leading Champions Programmes that reached thousands of employees across major change initiatives.</p>
+
+      <p>I am also something of a thought leader in the Sextech space, as former Director of Sextech School, a freelancer to a number of sexual wellness brands (available on request), and someone who has been building AI in this domain, and thinking carefully about how to do it responsibly, longer than most. For example, in 2023 I built what I believe is the world's first ethical erotic language learning AI chatbot. Building AI is something I do for fun. Leading enablement to drive adoption and change is truly something I have deep experience in.</p>
+
+      <p>I'd love the chance to talk with members of your team and I'd be so excited to sink my teeth into the practical challenge as part of this process.</p>
+
+      <p>Please put me forward for an interview.</p>
+
+      <div class="sign-off">
+        Sincere thanks,
+        <strong>Clare Carmody</strong>
+        <a href="mailto:clare@melba.app">clare@melba.app</a>  |  +33 6 66 26 52 00
+      </div>
+    </div>
+  </div>
+
+  <!-- CV -->
+  <div id="cv">
+    <p class="section-label">CV</p>
+
+    <!-- Profile -->
+    <p class="profile-text">Enablement and Change Management leader with 15+ years helping organisations adopt new tools, processes, and ways of working. Currently Claude Admin at Melba and responsible for all AI products. Spent ten years at Salesforce leading Change Management and Enablement across EMEA, APAC, and LATAM — including Champions Programmes reaching thousands of employees. Recognised thought leader in the Sextech sector: former Director of Sextech School, freelancer to sexual wellness brands, and an early builder of ethical AI in this domain. Equally comfortable in boardrooms and workshops, with technical teams and non-technical ones.</p>
+
+    <!-- Experience -->
+    <p class="section-label">Experience</p>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Head of Product &amp; Operations</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">Melba.app</span>
+      </div>
+      <p class="role-date">Sep 2025 – Present · Paris, France · #1 intimacy app for couples (1M+ users)</p>
+      <ul>
+        <li>Claude Admin: configure AI integration, prompt architecture, MCP connections, skills, and responsible use frameworks across a live consumer product</li>
+        <li>Built and manage Melba's AI recommendations engine, first AI intimacy coach, and AI content pipelines</li>
+        <li>Map and redesign internal processes with an AI-first approach; drive cross-functional adoption of AI tooling across the team</li>
+        <li>Oversee product roadmap and operations; dotted-line management of 3 developers</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Director</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">Sextech School</span>
+      </div>
+      <p class="role-date">Jan 2023 – Mar 2026 · Remote · Globally recognised incubator for founders in women's health and emerging technology</p>
+      <ul>
+        <li>Designed and led all learning programmes across 5 cohorts; 4.8/5 Trustpilot rating and 210% increase in revenue per student over tenure</li>
+        <li>Developed new product lines including On Demand courses and alumni subscription tiers</li>
+        <li>Freelanced as a learning designer and programme lead for a number of sexual wellness brands</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Senior Manager, Enablement &amp; Change Management</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">Salesforce</span>
+      </div>
+      <p class="role-date">Feb 2017 – Sep 2025 · 10 years · EMEA, APAC &amp; LATAM</p>
+      <ul>
+        <li>Led Change Management and Enablement across major GTM initiatives, including Champions Programmes reaching thousands of employees across EMEA, APAC, and LATAM</li>
+        <li>Led AI adoption across Salesforce sales processes; served as the internal expert helping Solution Engineers understand and apply the latest AI developments</li>
+        <li>First person in the ANZ GTM organisation to build and deploy a working AI agent (Agentforce + Claude) — used in live soft skills training programmes</li>
+        <li>Oversaw onboarding enablement as the organisation scaled from 1,000 to 8,000+ employees</li>
+        <li>Contributed to internal Responsible AI frameworks; led cross-functional conversations on ethical AI use</li>
+        <li>Delivered 1,000+ workshops at 4.75/5 satisfaction · 6× Salesforce certified incl. AI Specialist</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Senior Manager, Customer Success</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">Salesforce</span>
+      </div>
+      <p class="role-date">Oct 2021 – Jun 2023 · Sydney, Australia</p>
+      <ul>
+        <li>Managed sales and customer success for Salesforce.org Nonprofit Cloud across Asia Pacific; 94% renewal rate</li>
+        <li>Led Digital Transformation Leadership training for Nonprofit Executives across the region</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Founding Teacher &amp; Agile Coach</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">Fitzroy Academy</span>
+      </div>
+      <p class="role-date">Paris, France</p>
+      <ul>
+        <li>Founding teacher and Agile coach for early-stage startup founders; designed and delivered practical frameworks for building and scaling products under uncertainty</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Operations Manager → CEO</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">SPELD Victoria</span>
+      </div>
+      <p class="role-date">Jun 2014 – Nov 2015 · Melbourne, Australia</p>
+      <ul>
+        <li>Led 5 FTE and 30 specialist practitioners through cultural revitalisation of a 50-year-old organisation</li>
+        <li>Drove digital transformation (CRM implementation, marketing automation); doubled government investment; achieved $600M advocacy outcome</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Executive Producer &amp; General Manager</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">St Martins Youth Arts Centre</span>
+      </div>
+      <p class="role-date">Jul 2011 – Jun 2014 · Melbourne, Australia</p>
+      <ul>
+        <li>Combined CMO, CFO, and fundraising responsibilities; guided Australia's oldest youth arts centre through three years of sustained strategic growth</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <div class="role-header">
+        <span class="role-title">Consultant Facilitator</span>
+        <span class="role-dot">·</span>
+        <span class="role-org">PwC</span>
+      </div>
+      <p class="role-date">Jan 2011 – Sep 2011 · Melbourne, Australia</p>
+      <ul>
+        <li>Facilitated design thinking and co-creation workshops for major Australian corporations and nonprofits as part of PwC's innovation practice</li>
+      </ul>
+    </div>
+
+    <!-- Skills -->
+    <p class="section-label">Skills &amp; Tools</p>
+    <div class="skills-grid">
+      <div class="skill-row"><strong>AI Tools &amp; Configuration</strong>Claude Enterprise, Claude Admin, MCP servers, skills &amp; agents, Cowork, Claude Code, Agentforce, prompt architecture, responsible AI frameworks</div>
+      <div class="skill-row"><strong>Enablement &amp; Learning Design</strong>Curriculum development, multimodal delivery, onboarding strategy, Champions Programmes, global rollout</div>
+      <div class="skill-row"><strong>Facilitation</strong>1,000+ workshops delivered; design thinking, co-creation, soft skills; technical and non-technical audiences</div>
+      <div class="skill-row"><strong>Change Management</strong>GTM transformation, process redesign, adoption programmes, stakeholder engagement, EMEA/APAC/LATAM</div>
+      <div class="skill-row"><strong>Platforms</strong>Salesforce (6× certified incl. AI Specialist), CRM, marketing automation</div>
+      <div class="skill-row"><strong>Program Development</strong>Cohort programs, On Demand learning, subscription products, process mapping</div>
+    </div>
+
+    <!-- Personal Projects -->
+    <p class="section-label">Personal Projects</p>
+    <div class="project">
+      <h4>Ethical Erotic Language Learning AI Chatbot</h4>
+      <p class="proj-date">2023 · Personal project</p>
+      <p>Believed to be the world's first ethical erotic language learning AI chatbot. Built independently in 2023, combining AI app development with responsible content design. AI app development is an ongoing hobby.</p>
+    </div>
+
+    <!-- Education -->
+    <p class="section-label">Education</p>
+    <div class="edu-row">
+      <div class="edu-item">
+        <h4>Master of Business Administration</h4>
+        <p>University of Melbourne</p>
+        <span class="edu-badge">Honours · Dean's Award</span>
+      </div>
+      <div class="edu-item">
+        <h4>Bachelor of Creative Industries</h4>
+        <p>Queensland University of Technology</p>
+        <span class="edu-badge">Honours</span>
+      </div>
+    </div>
+
+  </div><!-- /cv -->
+
+</main>
+
+<footer>
+  <p>Clare Carmody · <a href="mailto:clare@melba.app">clare@melba.app</a></p>
+</footer>
+
+</body>
+</html>
